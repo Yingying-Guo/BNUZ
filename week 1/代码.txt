@@ -1,0 +1,50 @@
+<html>
+	XSS Test Part1:<br><input type="text" id='text1'>
+	<button onclick="search1()">Search</button><br>
+	<script>
+		function search1()
+		{
+			var text=document.getElementById('text1').value;
+			document.write(text);
+		}
+	</script>
+
+	XSS Test Part2:<br><input type="text" id='text2'>
+	<button onclick="search2()">Search</button><br>
+	<script>
+		function search2()
+		{
+			var text=document.getElementById('text2').value;
+			var newText=text.replace('<script>','');
+			document.write(newText);
+		}
+	</script>
+
+	XSS Test Part3:<br><input type="text" id='text3'>
+	<button onclick="search3()">Search</button><br>
+	<script>
+		function search3()
+		{
+			var text=document.getElementById('text3').value;
+			var newText=text.replace('&','&amp;');
+			newText = newText.replace('<','&lt;');
+			newText = newText.replace('>','&gt;');
+			newText = newText.replace('"','&quot;');
+			newText = newText.replace(' ','&nbsp;');
+			document.write(newText);
+		}
+	</script>
+
+	XSS Test Part4:<br><input type="text" id='text4'>
+	<button onclick="search4()">Search</button><br>
+	<script>
+		function search4()
+		{
+			var reg = /<[\s\S]*s[\s\S]*c[\s\S]*r[\s\S]*i[\s\S]*p[\s\S]*t[\s\S]script>/i;
+			var text=document.getElementById('text4').value;
+			var newText=text.replace(reg,'');
+			document.write(newText);
+		}
+	</script>
+	
+</html>
